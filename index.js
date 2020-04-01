@@ -85,7 +85,6 @@ module.exports = function sourceMapLoader(input, inputMap) {
   }
 
   function processMap(map, context, callback) {
-    map.sourceRoot = map.sourceRoot || context;
     if (!map.sourcesContent || map.sourcesContent.length < map.sources.length) {
       const sourcePrefix = map.sourceRoot ? map.sourceRoot + "/" : "";
       map.sources = map.sources.map((s) => {
@@ -140,6 +139,7 @@ module.exports = function sourceMapLoader(input, inputMap) {
       return;
     }
 
+    map.sourceRoot = map.sourceRoot || context;
     callback(null, input.replace(match[0], ""), map);
   }
 };
